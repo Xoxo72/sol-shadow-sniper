@@ -1,0 +1,6 @@
+name = "sol-shadow-sniper"
+main = "index.js"
+compatibility_date = "2025-06-15"
+
+[vars]
+BOT_URL = "http://127.0.0.1:8080/spawn"

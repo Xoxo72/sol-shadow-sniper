@@ -3,4 +3,6 @@ main = "index.js"
 compatibility_date = "2025-06-15"
 
 [vars]
-BOT_URL = "http://127.0.0.1:8080/spawn"
+BOT_URL  = "http://127.0.0.1:8080/spawn"
+TG_TOKEN = "8111128544:AAHkvedYIMVU4OrUFvQe5Vg1p_SuXtBpoZ0"
+TG_CHAT  = "1745241435"

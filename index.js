@@ -1,3 +1,7 @@
+const body = await req.json();
+console.log("=== Helius payload ===");
+console.log(JSON.stringify(body, null, 2));
+
 // Shadow tracker : détecte en live les transferts ≥ 0.5 SOL
 // vers des wallets inconnus depuis ta watchlist
 const WATCHLIST = new Set([

@@ -5,20 +5,24 @@ console.log(JSON.stringify(body, null, 2));
 // Shadow tracker : détecte en live les transferts ≥ 0.5 SOL
 // vers des wallets inconnus depuis ta watchlist
 const WATCHLIST = new Set([
-  "j1oeQoPeuEDmjvyMwBmCWexzCQup77kbKKxV59CnYbd",
-  "j1oAbxxiDUWvoHxEDhWE7THLjEkDQW2cSHYn2vttxTF",
-  "suqh5sHtr8HyJ7q8scBimULPkPpA557prMG47xCHQfK",
-  "j1opmdubY84LUeidrPCsSGskTCYmeJVzds1UWm6nngb",
-  "DfMxre4cKmvogbLrPigxmibVTTQDuzjdXojWzjCXXhzj",
-  "73LnJ7G9ffBDjEBGgJDdgvLUhD5APLonKrNiHsKDCw5B",
-  "HdxkiXqeN6qpK2YbG51W23QSWj3Yygc1eEk2zwmKJExp",
-  "5Dqsy7HaAfBwCmc21cBZfdQEjt39kSnthb28BnfkEN8e",
-  "ZG98FUCjb8mJ824Gbs6RsgVmr1FhXb2oNiJHa2dwmPd",
-  "o7RY6P2vQMuGSu1TrLM81weuzgDjaCRTXYRaXJwWcvc",
-  "qifZKL6UBTJgig5hAm5kUgX4c2ckD8r9Qkkf9xUeRBd",
-  "9dgP6ciSqytSJrcJoqEk5RM2kzMRZeJNLkchhm1u7eaf",
-  "6bN5ncxf4Qg3KGacRTTSKkWRu3Y9Uv2GbMu18GdwHajS",
-  "ETR2nhTSnq5uBgn8u3LPfsXkUJcQddsJnUYvHSafEFMG"
+"FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5",
+"BmFdpraQhkiDQE6SnfG5omcA1VwzqfXrwtNYBwWTymy6",
+"5ndLnEYqSFiA5yUFHo6LVZ1eWc6Rhh11K5CfJNkoHEPs",
+"5VCwKtCXgCJ6kit5FybXjvriW3xELsFDhYrPSqtJNmcD",
+"ASTyfSima4LLAdDgoFGkgqoKowG1LZFDr9fAQrg7iaJZ",
+"A77HErqtfN1hLLpvZ9pCtu66FEtM8BveoaKbbMoZ4RiR",
+"H8sMJSCQxfKiFTCfDR3DUMLPwcRbM61LGFJ8N4dK3WjS",
+"2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm",
+"D89hHJT5Aqyx1trP6EnGY9jJUB3whgnq3aUvvCqedvzf",
+"FpwQQhQQoEaVu3WU2qZMfF1hx48YyfwsLoRgXG83E99Q",
+"5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+"53unSgGWqEWANcPYRF35B2Bgf8BkszUtcccKiXwGGLyr",
+"7UhjbynicBP8rqcobwsAJDfRMjwgHSgdxcYNJmLwxfms",
+"2WL4xqEQPBXzW1GwUhkaGkCNz8AMs949Mn89tQSinYGq",
+"GJRs4FwHtemZ5ZE9x3FNvJ8TMwitKTh21yxdRPqn7npE",
+"AC5RDfQFmDS1deWZos921JfqscXdByf8BKHs5ACWjtW2",
+"G2YxRa6wt1qePMwfJzdXZG62ej4qaTC7YURzuh2Lwd3t",
+"AobVSwdW9BbpMdJvTqeCN4hPAmh4rHm7vwLnQ5ATSyrS",
 ]);
 
 const SHADOW_WATCH = new Map();

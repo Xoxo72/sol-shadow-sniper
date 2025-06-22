@@ -1,5 +1,3 @@
-// Shadow tracker : détecte en live les transferts ≥ 0.5 SOL
-// vers des wallets inconnus depuis ta watchlist
 const WATCHLIST = new Set([
   "FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5",
   "BmFdpraQhkiDQE6SnfG5omcA1VwzqfXrwtNYBwWTymy6",
@@ -27,7 +25,7 @@ export default {
   async fetch(req, env, ctx) {
     const body = await req.json();
 
-    // 🔍 Log brut du webhook Helius
+    // 👁️ Console log du payload Helius
     console.log("=== Helius payload ===");
     console.log(JSON.stringify(body, null, 2));
 
@@ -47,11 +45,9 @@ export default {
 
       if (amount < 0.5 || SHADOW_WATCH.has(to)) continue;
 
-      // mémoire temporaire (shadow mode 10 min)
       SHADOW_WATCH.set(to, Date.now());
       ctx.waitUntil(expire(to));
 
-      // ping vers ton bot
       ctx.waitUntil(fetch(env.BOT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

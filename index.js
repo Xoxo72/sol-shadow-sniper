@@ -1,3 +1,6 @@
+// Shadow tracker : détecte en live les transferts ≥ 0.5 SOL
+// vers des wallets inconnus depuis ta watchlist
+
 const WATCHLIST = new Set([
   "FWznbcNXWQuHTawe9RxvQ2LdCENssh12dsznf4RiouN5",
   "BmFdpraQhkiDQE6SnfG5omcA1VwzqfXrwtNYBwWTymy6",
@@ -16,7 +19,7 @@ const WATCHLIST = new Set([
   "GJRs4FwHtemZ5ZE9x3FNvJ8TMwitKTh21yxdRPqn7npE",
   "AC5RDfQFmDS1deWZos921JfqscXdByf8BKHs5ACWjtW2",
   "G2YxRa6wt1qePMwfJzdXZG62ej4qaTC7YURzuh2Lwd3t",
-  "AobVSwdW9BbpMdJvTqeCN4hPAmh4rHm7vwLnQ5ATSyrS",
+  "AobVSwdW9BbpMdJvTqeCN4hPAmh4rHm7vwLnQ5ATSyrS"
 ]);
 
 const SHADOW_WATCH = new Map();
@@ -25,7 +28,7 @@ export default {
   async fetch(req, env, ctx) {
     const body = await req.json();
 
-    // 👁️ Console log du payload Helius
+    // 👁️ Log le payload brut Helius
     console.log("=== Helius payload ===");
     console.log(JSON.stringify(body, null, 2));
 
@@ -45,9 +48,11 @@ export default {
 
       if (amount < 0.5 || SHADOW_WATCH.has(to)) continue;
 
+      // mémoire temporaire (shadow mode 10 min)
       SHADOW_WATCH.set(to, Date.now());
       ctx.waitUntil(expire(to));
 
+      // ping ton bot
       ctx.waitUntil(fetch(env.BOT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,6 +65,6 @@ export default {
 }
 
 async function expire(addr) {
-  await new Promise(r => setTimeout(r, 600_000)); // 10 min
+  await new Promise(r => setTimeout(r, 600_000)); // 10 minutes
   SHADOW_WATCH.delete(addr);
 }

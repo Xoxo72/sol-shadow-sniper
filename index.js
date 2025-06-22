@@ -27,39 +27,39 @@ const SHADOW_WATCH = new Map();
 export default {
   async fetch(req, env, ctx) {
     const body = await req.json();
-
-    // 👁️ Log le payload brut Helius
+    
+    // Logge le payload brut reçu
     console.log("=== Helius payload ===");
     console.log(JSON.stringify(body, null, 2));
-
+    
     const from = body.account;
     if (!WATCHLIST.has(from)) return new Response("not watcher", { status: 200 });
-
+    
     const instructions = body.transaction?.message?.instructions || [];
-
+    
     for (const ix of instructions) {
       if (ix.program !== "system") continue;
       const info = ix.parsed?.info;
       if (!info || info.source !== from) continue;
-
+      
       const to = info.destination;
       const lamports = Number(info.lamports || 0);
       const amount = lamports / 1e9;
-
+      
       if (amount < 0.5 || SHADOW_WATCH.has(to)) continue;
-
-      // mémoire temporaire (shadow mode 10 min)
+      
+      // Mémorisation temporaire pour éviter les spams (10 min)
       SHADOW_WATCH.set(to, Date.now());
       ctx.waitUntil(expire(to));
-
-      // ping ton bot
+      
+      // Ping ton bot
       ctx.waitUntil(fetch(env.BOT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ from, to, amount })
       }));
     }
-
+    
     return new Response("shadow scanned", { status: 200 });
   }
 }
